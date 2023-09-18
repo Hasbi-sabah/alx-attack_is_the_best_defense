@@ -70,11 +70,15 @@ You can analyze the capture file using either `tcpdump` or `tshark`:
   19 6.001628 172.31.145.221 → 54.228.39.88 SMTP 88 C: Pass: bXlwYXNzd29yZDk4OTgh
   ```
   
-  This part of the output shows the authentication process with the information:  
+  This part of the output shows the authentication process with the information:
+   
     User: bXlsb2dpbg==
+  
     Pass: bXlwYXNzd29yZDk4OTgh
 
   Credentials are Base64 encoded, so the decoded information would be:
+  
     User: mylogin
+  
     Pass: mypassword9898!
 
