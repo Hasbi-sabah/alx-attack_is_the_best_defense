@@ -127,13 +127,11 @@ Run Hydra with the specified requirements:
 hydra -l sylvain -P 11_char_passwords.txt ssh://127.0.0.1
 ```
 
-### Explanation of Command Parameters:
+   - `-l sylvain`: Specifies the target username as "sylvain." This is the username for which you are attempting to guess the password.
 
-- `-l sylvain`: Specifies the target username as "sylvain." This is the username for which you are attempting to guess the password.
+   - `-P 11_char_passwords.txt`: Specifies the password list or wordlist you are using for the attack. In this case, the wordlist contains passwords with 11 characters. Hydra will try each password from this list in an attempt to gain access to the SSH service.
 
-- `-P 11_char_passwords.txt`: Specifies the password list or wordlist you are using for the attack. In this case, the wordlist contains passwords with 11 characters. Hydra will try each password from this list in an attempt to gain access to the SSH service.
-
-- `ssh://127.0.0.1`: Specifies the target SSH service running on the local host (127.0.0.1). Hydra will attempt to log in to this SSH service using the provided username and the passwords from the wordlist.
+   - `ssh://127.0.0.1`: Specifies the target SSH service running on the local host (127.0.0.1). Hydra will attempt to log in to this SSH service using the provided username and the passwords from the wordlist.
 
 Please practice patience as hydra tries every password in the file until it finds the right one. Once successful, it will return an output similar to:
 
